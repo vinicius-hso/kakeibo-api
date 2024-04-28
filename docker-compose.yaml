@@ -1,0 +1,14 @@
+version: '3'
+
+services:  
+  postgres:
+    image: postgres
+    container_name: kakeibo_db
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./database/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql
