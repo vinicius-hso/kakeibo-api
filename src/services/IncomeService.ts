@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
-import { IIncome } from '../ts/IIncome';
-import Income from '../models/income';
+import { IIncome } from "../ts/IIncome";
+import Income from "../models/income";
 import postgresDataSource from "../database/PostgresDataSource";
 
 export class IncomeService {
@@ -20,6 +20,24 @@ export class IncomeService {
       .catch((error) => {
         return { error: error.message };
       });
+
+    return result;
+  }
+
+  public async getById(incomeId: string): Promise<IIncome | null> {
+    const income: IIncome[] | any = await this.dataSource.manager.findOneBy(
+      Income,
+      { id: incomeId }
+    );
+
+    return income;
+  }
+
+  public async delete(income: IIncome): Promise<Response> {
+    const result: any = await this.dataSource.manager.delete(
+        Income, 
+        { id: income.id }
+    )
 
     return result;
   }
