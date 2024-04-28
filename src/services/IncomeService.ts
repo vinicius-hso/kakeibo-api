@@ -10,21 +10,18 @@ export class IncomeService {
     this.dataSource = database;
   }
 
-  public async create(income: IIncome): Promise<Response> {
+  public async create(income: IIncome): Promise<Response | IIncome> {
     const newIncome = new Income();
 
     Object.assign(newIncome, income);
 
     const result: any = await this.dataSource.manager
       .save(Income, newIncome)
-      .catch((error) => {
-        return { error: error.message };
-      });
 
-    return result;
+    return result
   }
 
-  public async getById(incomeId: string): Promise<IIncome | null> {
+  public async getById(incomeId: string): Promise<Response | IIncome | null> {
     const income: IIncome[] | any = await this.dataSource.manager.findOneBy(
       Income,
       { id: incomeId }
