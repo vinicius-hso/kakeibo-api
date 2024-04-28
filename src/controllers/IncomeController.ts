@@ -49,7 +49,7 @@ export class IncomeController {
         .json({ message: "Bad request: id required!" })
 
     try {
-      const found: IIncome | null = await this.incomeService.getById(incomeId)
+      const found: any | IIncome | null = await this.incomeService.getById(incomeId)
 
       if (!found)
         return response
