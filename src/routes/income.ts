@@ -17,5 +17,6 @@ const incomeController = new IncomeController();
 
 routes.get("/", )
 routes.post("/new", incomeController.new.bind(incomeController))
+routes.delete("/", incomeController.delete.bind(incomeController))
 
 export default routes;
